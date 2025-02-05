@@ -89,5 +89,10 @@ flowchart TD
     E --> G[Vertex AI Training]
     F --> H[Vertex AI Endpoints]
     G --> I[Cloud Storage Modelos]
+```
+
+### 2. 🕸️ CI/CD para Machine Learning
     H --> J[Cloud Logging & Monitoring]
     I --> K[Cloud Scheduler + Cloud Run]
+
+
