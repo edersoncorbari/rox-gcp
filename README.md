@@ -51,7 +51,44 @@ Exemplos: APIs para previsões sob demanda, detecção de anomalias em tempo rea
 - Dataflow: Para processamento de dados em batch e streaming.
 - BigQuery: Para armazenar dados processados e estruturados.
 
-  
+3. Treinamento de Modelos
+
+- Vertex AI Training: Para treinar modelos de forma gerenciada.
+- Cloud Storage: Para armazenar modelos treinados e backups.
+
+3. Armazenamento / Controle de Modelos
+
+- Vertex AI Model Registry: Para versionamento e gerenciamento de modelos.
+- Cloud Storage: Para armazenar arquivos de modelos (heights, pickle, etc.).
+
+5. Deploy
+   
+- Vertex AI Endpoints: Para servir modelos em tempo real (fast).
+- Cloud Functions ou Cloud Run: Para execução de modelos batch sob demanda ou em horários agendados.
+
+Para caso de modelo batch disponibilização das inferências em uma tabela no Big Query cliente.
+
+6. Monitoramento e Logging
+
+- Cloud Logging: Coleta e armazenamento de logs em grande escala.
+- Vertex AI Model Monitoring: Escalabilidade automática para monitorar a qualidade dos modelos em produção (drift e métricas).
+
+7. Fluxo
+
+Fluxo básico para modelos Fast e Batch
+
+```mermaid
+flowchart TD
+    A[Coleta de Dados] --> B[Cloud Pub/Sub]
+    A --> C[Cloud Storage]
+    B --> D[Dataflow Streaming]
+    C --> E[Dataflow Batch]
+    D --> F[BigQuery]
+    E --> G[Vertex AI Training]
+    F --> H[Vertex AI Endpoints]
+    G --> I[Cloud Storage Modelos]
+    H --> J[Cloud Logging & Monitoring]
+    I --> K[Cloud Scheduler + Cloud Run]
 
 
 
