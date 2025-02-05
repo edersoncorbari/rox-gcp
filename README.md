@@ -21,3 +21,23 @@ Vatagens do Kubeflow Pipelines:
 - Você tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
 - Você precisa de portabilidade entre diferentes nuvens ou ambientes on-premises.
 
+#### 1.1 Infraestrutura de ML
+
+Tem que entender detalhes do cliente os tipos de modelos que serão implemendados. Mas, pensando em uma estrutura enxuta e escalavel usando GCP. Eu proponho o seguinte:
+
+##### Requisitos da Arquitetura
+
+Modelos Batch:
+
+- Processamento periódico de médio volumes de dados.
+
+Exemplos: previsões diárias, geração de relatórios, treinamento de modelos.
+
+Modelos Fast:
+
+Respostas em tempo real ou near real-time.
+
+Exemplos: APIs para previsões sob demanda, detecção de anomalias em tempo real.
+
+
+
