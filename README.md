@@ -37,7 +37,21 @@ Modelos Fast:
 
 Respostas em tempo real ou near real-time.
 
+##### Arquitetura Proposta
+
+1. Coleta de Dados
+
+- Cloud Pub/Sub: Para ingestão de dados em tempo real (fast).
+- Cloud Storage: Para armazenamento de dados brutos em lote (batch).
+  
 Exemplos: APIs para previsões sob demanda, detecção de anomalias em tempo real.
+
+2. Processamento de Dados
+
+- Dataflow: Para processamento de dados em batch e streaming.
+- BigQuery: Para armazenar dados processados e estruturados.
+
+  
 
 
 
