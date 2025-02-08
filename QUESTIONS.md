@@ -355,3 +355,5 @@ Outras práticas podem ser adotas como:
 - Implementação da auditoria de logs, usando Cloud Audit Logs, Cloud Monitoring, Security Command Center.
 
 Existe uma serie de possibilidades e ferramental disponível para garantir ambientes mais seguros.
+
+Voltar para o [README](./README.md) inicial.
