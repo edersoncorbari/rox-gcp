@@ -167,9 +167,9 @@ Configuração de exemplo do *Cloud Build*:
   entrypoint: 'python'
   args: ['scripts/validate.py']
 
-# Passo 4: Deplot do modelo no Vertex AI
+# Passo 4: Deploy do modelo no Vertex AI
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'Implantar Modelo'
+  id: 'Deploy Modelo'
   args: ['ai-platform', 'models', 'create', 'meu-modelo', '--region=southamerica-east1-a']
 ```
 
@@ -211,7 +211,7 @@ flowchart TD
     B --> C[Instalação de Dependências]
     C --> D[Treinamento do Modelo]
     D --> E[Validação do Modelo]
-    E --> F[Implantacao do Modelo]
+    E --> F[Deploy do Modelo]
     F --> G[Monitoramento]
 ```
 
