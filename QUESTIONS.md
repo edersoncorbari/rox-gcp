@@ -192,13 +192,14 @@ Configuração de exemplo do *Cloud Build*:
 
 Nesse ponto, é importante salientar que, dependendo do problema que o modelo busca resolver, é possível implementar uma pipeline de re-treinamento automático, que será acionada sempre que uma métrica específica atingir um nível de degradação pré-definido. Essa abordagem ajuda a manter a eficácia do modelo ao longo do tempo, adaptando-se às mudanças nos dados e no ambiente.
 
-É imprescindível realizar testes e validações *robustas*, usar Feature Store, scripts automatizados que assegurem a execução de todos os testes necessários antes do deploy do modelo. Essa prática garante a confiabilidade e a qualidade do modelo, identificando possíveis falhas ou inconsistências que possam impactar seu desempenho em produção.
+É imprescindível realizar testes e validações *robustas*, usar *Feature Store*, scripts automatizados que assegurem a execução de todos os testes necessários antes do deploy do modelo. Essa prática garante a confiabilidade e a qualidade do modelo, identificando possíveis falhas ou inconsistências que possam impactar seu desempenho em produção.
 
 *Exemplos*:
 
  - Testes unitários.
  - Uso de Feature Stores.
  - Volumetria dos dados.
+ - Fairness, para evitar vieses discriminatórios.
 
 #### 1.8 📊 Diagrama
 
@@ -216,12 +217,12 @@ flowchart TD
 
 #### 1.9 ⏳ Gerenciamento com Vertex AI Model Registry
 
-Para fazer o versionamento dos modelos, usamos o Vertex AI Model Registry. Ele facilita o controle de diferentes versões de um modelo, garantindo rastreabilidade e a capacidade de reverter para versões anteriores, caso necessário.
+Para fazer o versionamento dos modelos, usamos o Vertex AI Model Registry. Ele facilita o controle de diferentes versões de um modelo, garantindo rastreabilidade e a capacidade de **reverter** versões anteriores, caso necessário.
 
 **🎢 Steps para Registrar um Modelo**:
 
 Lembrando as steps abaixo estaram dentro de uma pipeline usando o terraform, mas para facilitar
-vamos fazer step by step.
+vamos fazer *step-by-step*.
 
 Após treinar um modelo, podemos registrá-lo.
 
@@ -243,14 +244,14 @@ Agora, suponhamos que esse modelo sofreu um re-treino. Subimos a nova versão do
 gcloud ai models set-default-version --model=MODEL_NAME --region=REGION --version=VERSION_NAME
 ```
 
-Agora a versão sera a **v2**. A pipeline rodou alguns testes e verificamos que o modelo anterior ainda
-era melhor. Então é necessário fazer o rollback para v1.
+Agora, a versão atual é a **v2**. A pipeline rodou alguns testes e verificamos que o modelo anterior ainda
+era melhor. Então é necessário fazer o rollback para **v1**.
 
 ```sh
 gcloud ai models set-default-version --model=MODEL_NAME --region=REGION --version=v1
 ```
 
-Pronto 🤟! O modelo anterior estara funcionando novamente. Esses são os benefícios do versionamento no Vertex AI Model Registry. 
+Rocks 🤟! O modelo anterior estara funcionando novamente. Esses são os benefícios do versionamento no Vertex AI Model Registry. 
 
 - 👉 Rastreabilidade: Mantém um histórico completo de todas as versões do modelo.
 - 👉 Facilidade de Reversão: Permite reverter para versões anteriores rapidamente em caso de problemas.
@@ -258,17 +259,17 @@ Pronto 🤟! O modelo anterior estara funcionando novamente. Esses são os benef
 
 ### 3. 🔍 Monitoramento e Observabilidade 
 
-Já falamos um pouco acima do monitoramento. Mas vamos detalhar mais.
+Já mencionamos um pouco acima do monitoramento, mas vamos detalhar mais.
 
-O drift é uma métrica de monitoramento, ocorre quando a relação entre as variáveis de entrada e a variável de saída muda ao longo do tempo, 
+O *drift* é uma métrica de monitoramento, ocorre quando a relação entre as variáveis de entrada e a variável de saída muda ao longo do tempo, 
 afetando a performance do modelo. 
 
 *Exemplo*:
 
-O modelo foi treinado usando dados do passado para prever o presente e futuro. Porém esses dados ao longo
-do tempo vão mudando, então o drift verifica esse desvio entre as mudanças nas variavels.
+O modelo foi treinado usando dados do passado para prever o *presente* e *futuro*. Porém esses dados ao longo
+do tempo vão mudando, então o *drift* verifica esse desvio entre as variáveis.
 
-Usando a **GCP**, podemos usar ferramentas como *Vertex AI Model Monitoring* para detectar esse tipo de problema.
+Usando a **GCP**, podemos usar ferramentas como *Vertex AI Model Monitoring* para detectar os (*drifts*), dentre outras métricas.
 
 - 👉 Ao fazer o deploy do modelo podemos habilitar o monitoramento contínuo, para rastrear o drift.
 - 👉 Podemos definir os (thresholds) para métricas, e quando se degradar alertamos via email o time, por exemplo.
@@ -283,7 +284,8 @@ Além do drift de dados, existe outras métricas que são importantes acompanhar
 outras. Em casos de modelos *Fast*, acompanhar a latências de respostas dos *requests*.
 
 ```Nota 📑```: Esse processo em alguns casos pode ser complexo, então podemos criar uma pipeline de re-treino automática para
-treinar o modelo com dados mais recentes ou investigar o problema antes de tentar re-treinar automaticamente. 
+re-treinar o modelo com dados mais recentes ou investigar o problema antes de tentar re-treinar automaticamente, para alguns
+casos o re-treino automático *não é a melhor opção*.
 
 Para o ferramental na *GCP* podemos usar para monitoramento:
 
@@ -291,64 +293,65 @@ Para o ferramental na *GCP* podemos usar para monitoramento:
 - 👉 Cloud Monitoring: Configura alertas personalizados para métricas específicas.
 - 👉 BigQuery: Armazena logs e métricas para análise histórica.
 - 👉 Dataflow: Processa dados em tempo real para monitoramento contínuo.
-- 👉 Escrever um solução personalizada usando Cloud Run.
+- 👉 Codar uma solução personalizada usando Cloud Run, por exemplo.
 
 ### 4. Segurança e Compliance 🔍
 
 A GCP oferece alguns serviços e práticas recomendadas para proteger os dados. Algumas são padrões nos
-serviços como *AES-256*, *TLS* para garantir que os dados sejam criptografados durante as transferência entre serviços.
+serviços como *AES-256*, *TLS*, *SSL* para garantir que os dados sejam criptografados durante as transferência entre serviços.
 
 É importante fazer o controle dos acessos via *IAM*. 
 
 *Exemplos*:
 
-- Definir permissões granulares e garantir que apenas usuários e serviços autorizados tenham acesso aos dados.
-- Aplicar o princípio do menor privilégio, concedendo apenas as permissões necessárias.
+- ✅ Definir permissões granulares e garantir que apenas usuários e serviços autorizados tenham acesso aos dados.
+- ✅ Aplicar o *princípio do menor privilégio*, concedendo apenas as permissões necessárias.
 
 Criação de Service Accounts:
 
-- Utilizar contas de serviço para autenticar aplicações, evitando o uso de credenciais de usuários humanos.
+- ✅ Utilizar contas de serviço para autenticar aplicações, evitando o uso de credenciais de usuários *humanos*.
 
 Usar VPC 🌥️:
 
-Configurando limites para restringir o acesso a serviços como BigQuery, Cloud Storage e Vertex AI, evitando vazamentos de dados.
+- ✅ Configurando limites para restringir o acesso a serviços como BigQuery, Cloud Storage e Vertex AI, evitando vazamentos de dados.
+- ✅ Configurar *redes privadas* para garantir que o tráfego de dados não seja exposto à internet pública.
 
 Anonimização de Dados
 
 *Exemplos*:
 
-- Data Loss Prevention (DLP) API: Identificar e anonimizar informações sensíveis, como CPFs, números de cartão de crédito ou endereços de e-mail.
-- Pseudonimização: Substitua identificadores diretos por valores pseudônimos, mantendo a utilidade dos dados para treinamento sem expor informações sensíveis.
+- ✅ Data Loss Prevention (DLP) API: Identificar e anonimizar informações sensíveis, como CPFs, números de cartão de crédito ou endereços de e-mail.
+- ✅ Pseudonimização: Alterar identificadores diretos por valores pseudônimos, mantendo a utilidade dos dados para treinamento sem expor informações sensíveis do cliente / pessoa.
 
 Usar **ambientes seguros** para treino, usando serviços como:
 
-- Vertex AI: O Vertex AI oferece um ambiente seguro para treinar modelos, com integração nativa ao IAM e criptografia de dados.
-- AI Platform Notebooks: Utilizar notebooks gerenciados com controles de acesso e criptografia para desenvolver e testar modelos.
-
-Ativar IPs e VPCs:
-
-Configurar *redes privadas* para garantir que o tráfego de dados não seja exposto à internet pública.
+- ✅ Vertex AI: O Vertex AI oferece um ambiente seguro para treinar modelos, com integração nativa ao *IAM* e criptografia de dados.
+- ✅ AI Platform Notebooks: Utilizar notebooks gerenciados com controles de acesso e criptografia para desenvolver e testar modelos.
 
 Usar o Cloud Audit Logs:
 
-- Habilitar logs de auditoria para rastrear todas as ações realizadas nos serviços do GCP, como acessos a dados e operações de treinamento.
+- ✅ Habilitar logs de auditoria para rastrear todas as ações realizadas nos serviços do **GCP**, como acessos a dados e operações de treinamento.
 
-Para proteger pipelines de treinamento, usaria as ferramentas e as praticas a seguir: 
+Para proteger as *pipelines de treinamento*, podemos usar as ferramentas e as praticas a seguir: 
 
 **IAM 🔑**
 
-- Seguindo o princípio do menor privilégio possível.
-- Papéis (Roles) pré-definidos e customizados.
-- Grupos de usúarios (por exemplo, *data-scientists*, *ml-engineers*, *data-engineers*), em vez de a usuários individuais.
+- 👉 Seguindo o princípio do menor privilégio possível.
+- 👉 Papéis (Roles) pré-definidos e customizados.
+- 👉 Grupos de usúarios (por exemplo, *data-scientists*, *ml-engineers*, *data-engineers*), em vez de usuários individuais.
 
 **Service Accounts 🔑**
 
 Contas de serviço são usadas para autenticar aplicações e serviços, evitando o uso de credenciais pessoais.
 
-- Contas de Serviço Específicas: Dedicadas para pipelines de treinamento e inferência.
-- Limitação de Escopo: O escopo das contas de serviço apenas às permissões necessárias para executar suas tarefas.
+- 👉 Contas de Serviço Específicas: Dedicadas para pipelines de treinamento e inferência.
+- 👉 Limitação de Escopo: O escopo das contas de serviço apenas às permissões necessárias para executar suas tarefas.
 
-Outras práticas podem ser adotas como criação de token e expiração dos mesmos. Usuários e chaves específicas para o 
-CI/CD dos repositórios de código fonte, usar serviços como Secret Manager, implementação da auditoria de logs, usando 
-Cloud Audit Logs, Cloud Monitoring, Security Command Center, existe uma serie de possibilidades e ferramental disponivel.
+Outras práticas podem ser adotas como:
 
+- Criação de *tokens* com tempo de expiração. 
+- Usuários e chaves 🔑 específicas para o *CI/CD* dos repositórios de código fonte.
+- Usar serviços como *Secret Manager*.
+- Implementação da auditoria de logs, usando Cloud Audit Logs, Cloud Monitoring, Security Command Center.
+
+Existe uma serie de possibilidades e ferramental disponível para garantir ambientes mais seguros.
