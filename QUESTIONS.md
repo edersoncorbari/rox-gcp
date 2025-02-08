@@ -13,15 +13,15 @@ Nessa página contém as respostas das perguntas teóricas elaboradas pelo clien
 
 🧭 Vantagens do **Vertex AI Pipelines**:
 
-👉 Uma solução pronta para uso com mínimo esforço de configuração.
-👉 Focado em produtividade, você não quer gerenciar infraestruturas complexas.
-👉 A empresa já usa outros serviços do Vertex AI e deseja integração.
+- 👉 Uma solução pronta para uso com mínimo esforço de configuração.
+- 👉 Focado em produtividade, você não quer gerenciar infraestruturas complexas.
+- 👉 A empresa já usa outros serviços do Vertex AI e deseja integração.
 
 🧭 Vantagens do **Kubeflow Pipelines**:
 
-👉 A empresa precisa de controle total sobre a infraestrutura e pipelines.
-👉 A empresa tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
-👉 A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera).
+- 👉 A empresa precisa de controle total sobre a infraestrutura e pipelines.
+- 👉 A empresa tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
+- 👉 A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera).
 
 #### 1.1 🔧 Infraestrutura de ML
 
