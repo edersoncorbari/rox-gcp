@@ -7,21 +7,21 @@ Nessa página contém as respostas das perguntas teóricas elaboradas pelo clien
 **Vertex AI Pipelines** e **Kubeflow Pipelines** são duas soluções para orquestração fluxos de **Machine Learning**. Ambos permitem criar, gerenciar e monitorar pipelines de ML, mas têm diferenças em termos de integração, facilidade de uso e casos de uso ideais. Abaixo as principais diferenças:
 
 - Vertex AI Pipelines é um serviço totalmente gerenciado do Google Cloud, parte da plataforma Vertex AI, que simplifica a criação e execução de pipelines (esteiras) de ML.
-- Ele é baseado no Kubeflow Pipelines, mas abstrai a complexidade.
+- Ele é baseado no Kubeflow Pipelines, abstraindo a complexidade.
 - Kubeflow Pipelines é uma plataforma de código aberto para orquestração de workflows de ML, projetada para rodar em Kubernetes.
 - Ele oferece mais flexibilidade e controle, mas requer configuração e gerenciamento de infraestrutura.
 
 🧭 Vantagens do **Vertex AI Pipelines**:
 
-- Uma solução pronta para uso com mínimo esforço de configuração.
-- Focado em produtividade, você não quer gerenciar infraestruturas complexas.
-- A empresa já usa outros serviços do Vertex AI e deseja integração.
+👉 Uma solução pronta para uso com mínimo esforço de configuração.
+👉 Focado em produtividade, você não quer gerenciar infraestruturas complexas.
+👉 A empresa já usa outros serviços do Vertex AI e deseja integração.
 
 🧭 Vantagens do **Kubeflow Pipelines**:
 
-- A empresa precisa de controle total sobre a infraestrutura e pipelines.
-- A empresa tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
-- A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera).
+👉 A empresa precisa de controle total sobre a infraestrutura e pipelines.
+👉 A empresa tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
+👉 A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera).
 
 #### 1.1 🔧 Infraestrutura de ML
 
