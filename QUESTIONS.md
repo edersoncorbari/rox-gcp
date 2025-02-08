@@ -21,7 +21,7 @@ Nessa página contém as respostas das perguntas teóricas elaboradas pelo clien
 
 - 👉 A empresa precisa de controle total sobre a infraestrutura e pipelines.
 - 👉 A empresa tem expertise em Kubernetes e deseja personalizar o ambiente do seu jeito.
-- 👉 A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera).
+- 👉 A empresa precisa de portabilidade entre diferentes nuvens (multi-cloud) ou ambientes on-premises, exemplo (Cloudera, SaaS).
 
 #### 1.1 🔧 Infraestrutura de ML
 
@@ -39,7 +39,7 @@ Modelos **Fast** ⚡:
 
 - Respostas em tempo real ou near real-time.
 
-*Exemplos*: previsões online, modelo de NLP, detecção facial, etc...
+*Exemplos*: previsões online, modelo de NLP, biometria facial, etc...
 
 ##### 🎯 Arquitetura Proposta
 
@@ -62,7 +62,7 @@ Steps:
 - Vertex AI Training: Para treinar modelos de forma gerenciada.
 - Cloud Storage: Para armazenar modelos treinados e backups dos mesmos.
 
-3. Armazenamento / Controle de Modelos 🗂️
+4. Armazenamento / Controle de Modelos 🗂️
 
 - Vertex AI Model Registry: Para versionamento e gerenciamento de modelos.
 - Cloud Storage: Para armazenar arquivos de modelos (h5, pickle, joblib, etc...).
