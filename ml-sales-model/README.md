@@ -47,16 +47,6 @@ gcloud projects add-iam-policy-binding SEU-PROJECTO-NA-GCP \
   --role="roles/composer.ServiceAgentV2Ext"
 ```
 
----
-
-gcloud functions deploy deploy_model \
-  --runtime python39 \
-  --trigger-event google.storage.object.finalize \
-  --trigger-resource seu_projeto_gcp-ml-bucket \
-  --entry-point deploy_model
-
----
-
 ### 3. Projeto 🚀
 
 Siga os passos abaixo para configurar e executar o projeto na sua estação de trabalho:
