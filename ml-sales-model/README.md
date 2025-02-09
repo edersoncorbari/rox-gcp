@@ -198,7 +198,7 @@ Ajuste as variáveis no script de deploy *(pipelines/deploy_model.py)*: 🔧📝
 
 ```hcl
 project_id = ""
-region = "us-west1"
+region = ""
 ```
 
 2. **Cloud Function**
