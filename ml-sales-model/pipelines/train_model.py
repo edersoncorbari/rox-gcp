@@ -13,6 +13,7 @@ args = parser.parse_args()
 project_id = ""
 region = ""
 bucket_name = "mlops-models15"
+
 file_name = "sales_dataset.csv"
 
 storage_client = storage.Client(project=project_id)
@@ -33,7 +34,6 @@ with open(model_path, "wb") as f:
 
 blob = bucket.blob(f"models/sales_forecast_model.pkl")
 blob.upload_from_filename(model_path)
-
 print(f"Modelo salvo em: gs://{bucket_name}/models/sales_forecast_model.pkl")
 
 aiplatform.init(project=project_id, location=region)
@@ -43,4 +43,3 @@ model = aiplatform.Model.upload(
     serving_container_image_uri="us-docker.pkg.dev/vertex-ai/prediction/sklearn-cpu.1-0"
 )
 print(f"Modelo registrado no Vertex AI: {model.resource_name}")
-

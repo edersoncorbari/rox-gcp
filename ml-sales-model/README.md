@@ -48,10 +48,6 @@ gcloud projects add-iam-policy-binding SEU-PROJECTO-NA-GCP \
 ```
 
 ---
-export GOOGLE_APPLICATION_CREDENTIALS="caminho/para/sua/chave.json"
-
-gsutil cp data/sales_dataset.csv gs://mlops-models15/
-gsutil cp data/sales_forecast_model.pkl gs://mlops-models15/models
 
 gcloud functions deploy deploy_model \
   --runtime python39 \
@@ -115,7 +111,7 @@ GOOGLE_PROJECT_ID       = "meu-projeto-na-gcp"
 GOOGLE_REGION           = "us-west-1"
 ```
 
-Depois de ajustar as variaveis, 
+Depois de ajustar as variaveis:
 
 ```hcl
 terraform/terraform.tfvars 
@@ -157,7 +153,121 @@ Confirme a ação digitando **yes** quando solicitado.
 
 **Observações importantes 🚨**
 
+- Confirme se todos os recursos foram criar na GPC.
 - Certifique-se de que a conta de serviço utilizada pelo Terraform tenha permissões suficientes para criar e gerenciar recursos na GCP.
 - Mantenha o arquivo (*terraform.tfstate*) seguro, pois ele contém o estado atual da sua infraestrutura.
 
-------------------------------------------------------------------------
+#### 3.2. Pipeline de Treino e Deploy 🚀📊
+
+Agora, é necessário ajustar as Variáveis no script de treino do modelo e registrá-lo no Vertex AI. 🛠️🤖
+
+1. **Terminal**
+
+Primeiro, defina a variável de ambiente no terminal:
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="caminho/para/sua/chave.json"
+```
+
+2. **Treino**
+
+Edite o script Python *(pipelines/train_model.py)* 🖋️🐍 e ajuste as variáveis: 🔧📝
+
+```hcl
+project_id = ""
+region = ""
+bucket_name = ""
+```
+
+3. **Bucket**
+
+Copie os arquivos para o bucket da GCP:
+
+```bash
+gsutil cp data/sales_dataset.csv gs://mlops-models15/
+gsutil cp data/sales_forecast_model.pkl gs://mlops-models15/models
+```
+
+4. **Teste**
+
+Você pode nesse momento executar o script:
+
+```bash
+python3.11 pipelines/train_model.py
+```
+
+Verifique no Vertex AI a pipeline de treino sendo executada.
+
+#### 3.3. Monitoramento
+
+Agora precisamos garantir o monitoramento do modelo.
+
+1. **Variáveis**
+
+Ajuste as variáveis no script de deploy *(pipelines/deploy_model.py)*: 🔧📝
+
+```hcl
+project_id = ""
+region = "us-west1"
+```
+
+2. **Cloud Function**
+
+Crie uma Cloud Function para monitorar o deploy:
+
+```bash
+gcloud functions deploy deploy_model \
+  --runtime python311 \
+  --trigger-event google.storage.object.finalize \
+  --trigger-resource seu_projeto_gcp-ml-bucket \
+  --entry-point deploy_model
+```
+
+3. **Logs e Monitoramento**
+
+Configuração de Logging:
+
+```bash
+gcloud logging sinks create ml_logs \
+  storage.googleapis.com/seu_projeto_gcp-ml-bucket
+```
+
+4. **Criando Alerta no Cloud Monitoring**
+
+Criamos um alerta que notifica via Pub/Sub caso a latência da inferência ultrapasse *500ms*.
+
+```bash
+gcloud pubsub topics create ml_alerts
+```
+
+Agora crie o alerta:
+
+```bash
+gcloud monitoring policies create \
+  --notification-channels=ml_alerts \
+  --display-name="Alerta de Latência no Modelo de Vendas" \
+  --condition-threshold-value=500 \
+  --condition-threshold-comparison=COMPARISON_GT \
+  --condition-threshold-aggregations=alignment_period=60s,per_series_aligner=ALIGN_PERCENTILE_99 \
+  --condition-threshold-filter='metric.type="serving_latency"' \
+  --duration=60s
+```
+
+#### 4. Conclusão
+
+Resumo do que foi feito:
+
+- ✅ Infraestrutura como Código (IaC)
+
+Terraform provisiona Cloud Storage, Cloud Composer (Airflow) e Vertex AI Training Job.
+
+- ✅ Pipeline de Treinamento e Deploy
+
+Script Python para treinar o modelo, salvar no Cloud Storage e registrar no Vertex AI.
+
+- ✅ Monitoramento e Logging
+
+Cloud Logging armazena logs do treinamento e inferência. 
+Cloud Monitoring cria um alerta via Pub/Sub caso a latência ultrapasse 500ms.
+
+Com isso, temos um pipeline completo para treino, deplo e monitoramento do modelo na GCP. 🚀

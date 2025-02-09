@@ -62,4 +62,3 @@ resource "google_vertex_ai_pipeline" "ml_training" {
     python_version      = "3.11"
   }
 }
-

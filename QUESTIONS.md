@@ -356,4 +356,4 @@ Outras práticas podem ser adotas como:
 
 Existe uma serie de possibilidades e ferramental disponível para garantir ambientes mais seguros.
 
-Voltar para o [README](./README.md) inicial.
+Voltar ao [README](./README.md) 👈 inicial.
