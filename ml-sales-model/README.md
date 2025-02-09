@@ -24,7 +24,7 @@ Efetue o login na Google Cloud com o comando:
 gcloud auth login
 ```
 
-É preciso abilitar as APIs necessárias na GCP caso você não tenha habilitado. Use o comando:
+É preciso abilitar as APIs na GCP. Para isso, use o comando:
 
 ```bash
 gcloud services enable \
