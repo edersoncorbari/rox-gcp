@@ -257,8 +257,9 @@ Script Python para treinar o modelo, salvar no Cloud Storage e registrar no Vert
 
 - ✅ Monitoramento e Logging
 
-Voltar ao [README](./README.md) 👈 inicial.
 Cloud Logging armazena logs do treinamento e inferência. 
 Cloud Monitoring cria um alerta via Pub/Sub caso a latência ultrapasse 500ms.
 
-Com isso, temos um pipeline completo para treino, deplo e monitoramento do modelo na GCP. 🚀
+Com isso, temos um pipeline completo para treino, deploy e monitoramento do modelo na GCP. 🚀
+
+Voltar ao [README](./README.md) 👈 inicial.
