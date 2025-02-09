@@ -265,4 +265,6 @@ Com isso, temos um pipeline completo para treino, deploy e monitoramento do mode
 ```Notas 📝:``` Os testes foram feitos usando a GCP na região: **us-west1**. A configuração de alertas e logging estava planejada para ser provisionada via Terraform, 
 porém, um erro de incompatibilidade impediu a implementação.
 
+Rocks 🤟
+
 Voltar ao [README](./README.md) 👈 inicial.
