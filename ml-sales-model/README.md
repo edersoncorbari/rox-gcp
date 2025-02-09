@@ -107,7 +107,7 @@ Depois de ajustar as variaveis:
 terraform/terraform.tfvars 
 ```
 
-2. **Terraform*
+2. **Terraform**
 
 Execute o comando abaixo para inicializar o Terraform e baixar os providers necessários:
 
