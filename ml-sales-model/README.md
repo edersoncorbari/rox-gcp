@@ -143,13 +143,13 @@ Confirme a ação digitando **yes** quando solicitado.
 
 **Observações importantes 🚨**
 
-- Confirme se todos os recursos foram criar na GPC.
+- Confirme se todos os recursos foram criados na GPC.
 - Certifique-se de que a conta de serviço utilizada pelo Terraform tenha permissões suficientes para criar e gerenciar recursos na GCP.
 - Mantenha o arquivo (*terraform.tfstate*) seguro, pois ele contém o estado atual da sua infraestrutura.
 
 #### 3.2. Pipeline de Treino e Deploy 🚀📊
 
-Agora, é necessário ajustar as Variáveis no script de treino do modelo e registrá-lo no Vertex AI. 🛠️🤖
+Agora, é necessário ajustar as variáveis no script de treino do modelo e registrá-lo no Vertex AI. 🛠️🤖
 
 1. **Terminal**
 
