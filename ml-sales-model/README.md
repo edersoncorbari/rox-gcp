@@ -1,10 +1,10 @@
 # 🧩 Desafio Prático
 
-Esta página contém as instruções necessárias para utilizar o projeto, que realiza o deploy de um modelo de previsão de demanda de vendas. A implementação foi desenvolvida utilizando o conjunto de ferramentas disponíveis na Google Cloud Platform (GCP).
+Esta página contém as instruções necessárias para utilizar o projeto, que realiza o deploy de um modelo de *Previsão de Demanda de Vendas*. A implementação foi desenvolvida utilizando o conjunto de ferramentas disponíveis na Google Cloud Platform (GCP).
 
 ### 1. Requisitos 📋
 
-✅ Permissões na GCP: É necessário ter perfil de administrador na conta da Google Cloud Platform (GCP) da sua empresa.
+✅ Permissões na *GCP*: É necessário ter perfil de administrador na conta da Google Cloud Platform (GCP) da sua empresa.
 
 🛠️ Ferramentas utilizadas:
 
