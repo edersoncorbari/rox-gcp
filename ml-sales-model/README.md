@@ -267,4 +267,4 @@ porém, um erro de incompatibilidade impediu a implementação.
 
 Rocks 🤟
 
-Voltar ao [README](./README.md) 👈 inicial.
+Voltar ao [README](../README.md) 👈 inicial.
